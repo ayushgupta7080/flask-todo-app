@@ -6,8 +6,9 @@ This project is great for beginners who want to understand how full-stack web ap
 ---
 
 ## 📸 Screenshots
+![Screenshot 2025-07-09 203147](https://github.com/user-attachments/assets/3d2b4d9a-eb92-470c-99ed-01a7bbf7f3f6)
 
-![App Screenshot](https://via.placeholder.com/700x400?text=Your+App+Screenshot+Here)
+![Screenshot 2025-07-09 203311](https://github.com/user-attachments/assets/2ddf4d16-1e85-4287-a378-e4f1280b8edc)
 
 ---
 

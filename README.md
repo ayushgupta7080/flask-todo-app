@@ -47,39 +47,38 @@ todo-flask/
 
 🧑‍💻 How to Run the Project
 ✅ Prerequisites
-Python 3.x installed on your system
+ • Python 3.x installed on your system
 
-pip (Python package installer)
+ • pip (Python package installer)
 
 📦 Installation & Setup
-Clone the repository
+ 1. Clone the repository
 (Or download the ZIP and extract it)
 
-git clone https://github.com/ayushgupta7080/flask-todo-list.git
+ • git clone https://github.com/ayushgupta7080/flask-todo-list.git 
+ • cd flask-todo-list
 
-cd flask-todo-list
+ 2. Create a virtual environment (optional but recommended)
 
-Create a virtual environment (optional but recommended)
+ • python -m venv venv
 
-python -m venv venv
+ • For Linux/macOS: source venv/bin/activate
 
-For Linux/macOS: source venv/bin/activate
+ • For Windows: venv\Scripts\activate
 
-For Windows: venv\Scripts\activate
+ 3. Install dependencies
 
-Install dependencies
+ • pip install -r requirements.txt
 
-pip install -r requirements.txt
+ 4. Run the app
 
-Run the app
+ • python app.py
 
-python app.py
+ 5. Open in browser
 
-Open in browser
-
-Go to: http://127.0.0.1:5000
+ • Go to: http://127.0.0.1:5000
 
 📝 Notes
-A file named tasks.db (SQLite database) will be automatically created when the app runs for the first time.
+ • A file named tasks.db (SQLite database) will be automatically created when the app runs for the first time.
 
-You can customize the styles in static/style.css and update HTML files in the templates/ folder.
+ • You can customize the styles in static/style.css and update HTML files in the templates/ folder.

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>📝 To-Do List</h1>
+
+    <form method="POST" action="/add">
+        <input type="text" name="task" placeholder="Enter a task" required>
+        <button type="submit">Add</button>
+    </form>
+
+    <form action="/clear" method="get" onsubmit="return confirm('Delete all tasks?');">
+        <button type="submit" class="clear-all">🗑️ Clear All</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+            <li class="{{ 'done' if task[2] else '' }}">
+                {{ task[1] }} <br>
+                <small>{{ task[3] }}</small>
+                <div class="actions">
+                    <a href="/done/{{ task[0] }}">✔</a>
+                    <a href="/edit/{{ task[0] }}">✏️</a>
+                    <a href="/delete/{{ task[0] }}">❌</a>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

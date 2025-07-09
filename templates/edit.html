@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Edit Task</h2>
+    <form method="POST">
+        <input type="text" name="task" value="{{ task[1] }}" required>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">← Back</a>
+</body>
+</html>

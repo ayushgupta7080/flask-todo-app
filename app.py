@@ -3,9 +3,11 @@ import sqlite3
 
 app = Flask(__name__)
 
+DB_NAME = "tasks.db"
+
 # Create the DB and tasks table (if not exists)
 def init_db():
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
     c.execute('''
         CREATE TABLE IF NOT EXISTS tasks (
@@ -18,9 +20,13 @@ def init_db():
     conn.commit()
     conn.close()
 
+# ✅ IMPORTANT: run this when the module is imported
+# so it works on Render with gunicorn app:app
+init_db()
+
 @app.route('/')
 def index():
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
     c.execute("SELECT * FROM tasks ORDER BY created_at DESC")
     tasks = c.fetchall()
@@ -31,7 +37,7 @@ def index():
 def add():
     task = request.form.get('task')
     if task:
-        conn = sqlite3.connect('tasks.db')
+        conn = sqlite3.connect(DB_NAME)
         c = conn.cursor()
         c.execute("INSERT INTO tasks (content) VALUES (?)", (task,))
         conn.commit()
@@ -40,7 +46,7 @@ def add():
 
 @app.route('/delete/<int:task_id>')
 def delete(task_id):
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
     c.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
     conn.commit()
@@ -49,8 +55,9 @@ def delete(task_id):
 
 @app.route('/done/<int:task_id>')
 def mark_done(task_id):
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
+    # toggle is_done (0 ↔ 1)
     c.execute("UPDATE tasks SET is_done = NOT is_done WHERE id = ?", (task_id,))
     conn.commit()
     conn.close()
@@ -58,7 +65,7 @@ def mark_done(task_id):
 
 @app.route('/clear')
 def clear_all():
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
     c.execute("DELETE FROM tasks")
     conn.commit()
@@ -67,7 +74,7 @@ def clear_all():
 
 @app.route('/edit/<int:task_id>', methods=['GET', 'POST'])
 def edit(task_id):
-    conn = sqlite3.connect('tasks.db')
+    conn = sqlite3.connect(DB_NAME)
     c = conn.cursor()
 
     if request.method == 'POST':
@@ -83,5 +90,5 @@ def edit(task_id):
     return render_template('edit.html', task=task)
 
 if __name__ == '__main__':
-    init_db()
+    # For local development
     app.run(debug=True)
